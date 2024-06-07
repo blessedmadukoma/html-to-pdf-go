@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction Receipt</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      /* Header styles */
+      .container {
+        width: 90%;
+        margin: auto;
+      }
+
+      .header {
+        width: 100%;
+        height: auto;
+      }
+
+      .header .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 50px 0;
+      }
+
+      .header .header-content img {
+        float: left;
+        width: 150px;
+        height: 35px;
+      }
+
+      .header .header-content p {
+        float: right;
+        font-size: 20px;
+      }
+
+      .header .header-content p {
+        font-size: 14px;
+        margin: 0;
+      }
+
+      /* Main content style */
+      /* .main-content {
+        padding-top: 24px;
+      } */
+
+      .main-content .container p {
+        font-size: 16px;
+        padding: 16px 0;
+        float: left;
+        line-height: 1.5;
+        clear: both;
+      }
+
+      .customer-details {
+        clear: both;
+        float: right;
+        font-size: 10px;
+      }
+
+      .customer-details table {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+      }
+
+      .spacing-row {
+        height: 15px;
+      }
+
+      .customer-details table tbody tr td:first-of-type {
+        padding-right: 20px;
+        font-weight: bold;
+      }
+
+      .main-content .container .note {
+        background-color: rgba(244, 211, 165, 0.15);
+        clear: both;
+        min-height: 100px;
+        height: max-content;
+        border-radius: 5px;
+        margin-bottom: 30px;
+      }
+
+      .main-content .container .note p {
+        font-size: 14px;
+        padding: 16px;
+      }
+
+      .balance-details,
+      .customer-details {
+        clear: both;
+      }
+
+      .balance-details,
+      .account-details table {
+        margin-bottom: 50px;
+      }
+
+      .balance-details h2,
+      .account-details h2 {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .balance-details table,
+      .account-details table {
+        width: 100%;
+        font-size: 0.85rem;
+        border-collapse: collapse;
+      }
+
+      .balance-details th,
+      .balance-details td,
+      .account-details th,
+      .account-details td {
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+      }
+
+      .balance-details tr:last-of-type td {
+        border-bottom: none;
+      }
+
+      .balance-details th,
+      .balance-details td,
+      .account-details th,
+      .account-details td {
+        padding: 1rem;
+      }
+
+      /* Remove left padding from the first element */
+      .balance-details th:first-child,
+      .balance-details td:first-child,
+      .account-details th:first-child,
+      .account-details td:first-child {
+        padding-left: 0;
+      }
+
+      /* Footer style */
+      /* .footer {
+        position: fixed;
+        bottom: 0;
+      } */
+
+      .footer .footer-top {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .footer .footer-top {
+        overflow: hidden; /* Ensures the container encompasses floated children */
+        width: 100%;
+      }
+
+      .footer-top > div {
+        float: left;
+        margin-right: 10px;
+      }
+
+      .footer-top .first {
+        width: 15%;
+      }
+
+      .footer-top .first img {
+        width: 100px;
+      }
+
+      .footer-top .info {
+        width: 20%;
+      }
+
+      .footer-top .last {
+        width: 55%;
+      }
+
+      .footer .footer-top p {
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer .footer-top .text-xs {
+        font-size: 10px;
+      }
+
+      .clearfix::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .footer .footer-top p {
+        font-size: 12px;
+        padding: 0;
+      }
+
+      .footer .footer-top .text-xs {
+        font-size: 10px;
+      }
+
+      .footer .footer-bottom p {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .footer .footer-bottom {
+        overflow: hidden;
+      }
+
+      .footer .footer-bottom .one {
+        float: left;
+      }
+
+      .footer .footer-bottom .two {
+        float: right;
+        padding-right: 20px;
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container header-content" style="padding-top: 20px">
+        <!-- Purple image on white background -->
+        <!-- <img
+          src="https://platnova.com/static/header-logo-8fbdba73f62447f89666ff658941ad89.png"
+          alt="Platnova Logo"
+        /> -->
+
+        <!-- Black image on white background -->
+        <img
+          src="https://res.cloudinary.com/dqjowwy5k/image/upload/v1717738610/Frame_26_liu0iw.png"
+          alt="Platnova Logo"
+        />
+        <div style="text-align: right">
+          <h2>EUR Statement</h2>
+          <p>Generated on May 20, 2024<br />Platnova Inc.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="container">
+        <p style="font-size: 12px; font-weight: 600">
+          <span style="font-size: 18px; font-weight: 600"
+            >SANDRA SAULGRIEZE</span
+          >
+          <br />
+          <span>
+            14 The Dale<br />
+            Whitefield hall<br />
+            Bettystown<br />
+            Meath<br />
+            A92N27C
+          </span>
+        </p>
+
+        <!-- Customer Details -->
+        <div class="customer-details">
+          <table>
+            <tbody>
+              <tr>
+                <td>IBAN:</td>
+                <td>IE30REV099036022547749</td>
+              </tr>
+
+              <tr>
+                <td>BIC:</td>
+                <td>REVOIE23</td>
+              </tr>
+
+              <tr class="spacing-row"></tr>
+
+              <tr>
+                <td>IBAN:</td>
+                <td>IE30REV099036022547749</td>
+              </tr>
+
+              <tr>
+                <td>BIC:</td>
+                <td>REVOIE23</td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td>
+                  (You cannot use this IBAN for bank transfers.<br />Please use
+                  the IBAN found in the app)
+                </td>
+              </tr>
+
+              <tr class="spacing-row"></tr>
+
+              <tr>
+                <td>IBAN:</td>
+                <td>IE30REV099036022547749</td>
+              </tr>
+
+              <tr>
+                <td>BIC:</td>
+                <td>REVOIE23</td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td>
+                  (You cannot use this IBAN for bank transfers.<br />Please use
+                  the IBAN found in the app)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Balance Details -->
+        <div class="balance-details">
+          <h3>Balance Summary</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Opening Balance</th>
+                <th>Money Out</th>
+                <th>Money In</th>
+                <th>Closing Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Account (Current Account)</td>
+                <td>€2.52</td>
+                <td>€1,944.09</td>
+                <td>€1,978.00</td>
+                <td>€36.43</td>
+              </tr>
+
+              <tr>
+                <td>Total</td>
+                <td>€2.52</td>
+                <td>€1,944.09</td>
+                <td>€1,978.00</td>
+                <td>€36.43</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Account Details -->
+        <div class="account-details">
+          <h3>Acount transactions from 1 February 2023 to 29 March 2023</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Money Out</th>
+                <th>Money In</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3 Feb 2023</td>
+                <td>Apple Pay Top-up by *5453</td>
+                <td></td>
+                <td>$50.00</td>
+                <td>$52.52</td>
+              </tr>
+
+              <tr>
+                <td>3 Feb 2023</td>
+                <td>Apple Pay Top-up by *5453</td>
+                <td></td>
+                <td>$100.00</td>
+                <td>$52.52</td>
+              </tr>
+
+              <tr>
+                <td>3 Feb 2023</td>
+                <td>To LINA MILLER SAULGRIEZE</td>
+                <td>$100.00</td>
+                <td></td>
+                <td>$52.52</td>
+              </tr>
+
+              <tr>
+                <td>7 Feb 2023</td>
+                <td>To LINA MILLER SAULGRIEZE</td>
+                <td>$10.00</td>
+                <td></td>
+                <td>$42.52</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer Details -->
+        <div class="footer" style="position: fixed; bottom: 0">
+          <div class="footer-top clearfix">
+            <div class="first">
+              <img
+                src="https://res.cloudinary.com/dqjowwy5k/image/upload/v1717696412/platnova-qr_a2ubux.png"
+                alt="Platnova Logo"
+              />
+            </div>
+
+            <div class="info">
+              <div>
+                <p>Report lost or stolen card</p>
+                <p class="text-xs">+370 5 214 3608</p>
+              </div>
+              <div>
+                <p>Get help directly In app</p>
+                <p class="text-xs">Scan the QR code</p>
+              </div>
+            </div>
+
+            <div class="text-xs last">
+              <p>
+                Platnova LTD. (No. 120213497) with registered office address at
+                Remera, Gasabo, Umujyi wa Kigali, Rwanda <br />
+                Platnova Technologies Limited (No. 6934651) with registered
+                business address at Milagro Mall, Orchid Road, Eleganza Bus
+                Stop, Lekki. Lagos, Nigeria
+              </p>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <div class="one">
+              <p>&copy; 2024 Platnova Inc.</p>
+            </div>
+            <div class="two">
+              <p style="font-size: 11px">page 1 of 5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
